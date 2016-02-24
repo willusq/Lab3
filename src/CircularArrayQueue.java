@@ -42,8 +42,8 @@ public class CircularArrayQueue<T> implements QueueInterface{
         }
     }
  
-    public Object dequeue() throws EmptyQueueException {
-        Object item; 
+    public T dequeue() throws EmptyQueueException {
+        T item; 
         if(isEmpty()){
             throw new EmptyQueueException();
         }else{
