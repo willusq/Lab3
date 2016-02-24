@@ -1,73 +1,65 @@
 
-public class Queue<T> implements QueueInterface<T>{
+import java.util.LinkedList;
 
-	Node head=null;
+
+public class Queue {
+	private LinkedList<Object> list;
 	
-	@Override
-	public void enqueue(T newEntry) {
-		Boolean done=true;
-		Node curr=head;
-		if(head==null){//if the queue is empty, place the new entry at the head
-			head=(new Node(null,newEntry));
-			return;
-		}
-		while(done){//if not empty find the location where there is no next element, and place the new entry there
-			if(curr.next==null){//stop the loop, as this is the end, and this is the location that the the new element will be added
-				done=false;
-				curr.next=(new Node(null,newEntry));
-				return;
-			}else curr=curr.next;
-		}
+	// Queue constructor
+	public Queue()
+	{
+		// Create a new LinkedList.
+		list = new LinkedList<Object>();
 	}
 
-	@Override
-	public T dequeue() {
-		if(head==null){//The  Queue is Empty
-			throw new EmptyQueueException();
-		}else{//Queue is not empty, and the head will be removed, as it is the first in
-			Node curr=head;
-			head=curr.next;
-			return (T)curr.getValue();
-		}
+	public boolean isEmpty()
+	// Post: Returns true if the queue is empty. Otherwise, false.
+	{
+		return (list.isEmpty());
 	}
 
-	@Override
-	public T getFront() {
-		if(head==null){
-			throw new EmptyQueueException();
-		}else{
-			Node curr=head;
-			return (T)curr.getValue();
-		}
+	public void enqueue(Object item)
+	// Post: An item is added to the back of the queue.
+	{
+		// Append the item to the end of our linked list.
+		list.add(item);
 	}
 
-	@Override
-	public boolean isEmpty() {
-		if(head==null) return true;
-		else return false;
-	}
-
-	@Override
-	public void clear() {
-		head=null;
+	public Object dequeue()
+	// Pre: this.isEmpty() == false
+	// Post: The item at the front of the queue is returned and 
+	//         deleted from the queue. Returns null if precondition
+	//         not met.
+	{
+		// Store a reference to the item at the front of the queue
+		//   so that it does not get garbage collected when we 
+		//   remove it from the list.
+		// Note: list.get(...) returns null if item not found at
+		//   specified index. See postcondition.
+		Object item = list.get(1);
+		// Remove the item from the list.
+		// My implementation of the linked list is based on the
+		//   J2SE API reference. In both, elements start at 1,
+		//   unlike arrays which start at 0.
+		list.remove(1);
 		
+		// Return the item
+		return item;
 	}
-
-}
-
-class Node <T>{
+	public int length(){
+		
+		return list.size();
+	}
 	
-	Node next;
-	T data;
-	public Node(Node n,T d){
-		data=d;
-		next= n;
-	}
-	public T getValue(){
-		return data;
-	}
-	public void setValue(T v){
-		data=v;
+
+	public Object peek()
+	// Pre: this.isEmpty() == false
+	// Post: The item at the front of the queue is returned and 
+	//         deleted from the queue. Returns null if precondition
+	//         not met.
+	{
+		// This method is very similar to dequeue().
+		// See Queue.dequeue() for comments.
+		return list.get(1);
 	}
 }
-
