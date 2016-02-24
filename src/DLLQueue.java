@@ -22,7 +22,7 @@ public class DLLQueue<T> implements QueueInterface{
 	}
 
 	@Override
-	public Object dequeue() {
+	public T dequeue() {
 		if(head.next==null){
 			throw new EmptyQueueException();
 		}else{
@@ -34,17 +34,17 @@ public class DLLQueue<T> implements QueueInterface{
 			}else{
 			tmp.next.prev=head;	
 			}
-			return tmp.data;
+			return (T) tmp.data;
 		}
 	}
 
 	@Override
-	public Object getFront() {
+	public T getFront() {
 		if(head.next==null){
 			throw new EmptyQueueException();
 		}else{
 			DNode tmp = head.next;
-			return tmp.data;
+			return (T) tmp.data;
 		}
 	}
 
