@@ -46,7 +46,7 @@ public class Train {
     	while(it.hasNext()){
     		Rider a=it.next();
     		if (a.getDestination() == current.getStationID()){
-    			System.out.println(a.getName() + " got off the train at " + current.getStationName());
+    			//System.out.println(a.getName() + " got off the train at " + current.getStationName());
     			it.remove();
     		}
     	}
@@ -54,10 +54,10 @@ public class Train {
     }
     public void loadPassengers(Station current){
     	
-    	while (!current.outBound.isEmpty() || (this.isFull()))
+    	while (!current.outBound.isEmpty())
     	{
     		try{
-    			
+    			if(this.isFull())return;
     			Rider newRider = (Rider) current.outBound.dequeue();
         		Passengers.add(newRider);
     		}catch(EmptyQueueException e){

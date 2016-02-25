@@ -6,37 +6,63 @@ public class TrainRoute {
 	
 //I Plan on filling the main with trains that go from station to station
 //Trains will run both from the start to the end and from the end to the start, hence the in bound and out bound queue
+static int NUMRUNS = 4;
 public static void main(String args[]){
 	   	
 		//Station RunSimulation = new Station();
 		//RunSimulation.Simulation();
 		Station[] stations = new Station[16];
+		
 		for(int i=0;i<stations.length;++i){
 			stations[i] = new Station();
 		}
+		
 		Train train= new Train();
-		while(train.passengersOnTrain()>0){	
-		
-		for(int i=0;i<stations.length;++i){
-			int a=train.passengersOnTrain();
+		for(int j=0;j<NUMRUNS||train.passengersOnTrain()>0;++j){
+			System.out.println("################################################\n################################################");
+			System.out.println("Starting pass number " + j);
+			System.out.println("################################################\n################################################");
+			for(int i=0;i<stations.length;++i){
+				if(j<NUMRUNS){
+					stations[i].queueOfPassengers();
+				}
+				String sName = stations[i].getStationName();
+				int a=train.passengersOnTrain();
+				train.loadPassengers(stations[i]);
+				System.out.println(train.passengersOnTrain()-a + " got on the train at " + sName);
+				
+				
+				a=train.passengersOnTrain();
+				train.unloadPassengers(stations[i]);
+				System.out.println(a-train.passengersOnTrain() + " got off the train at " + sName);
+				System.out.println(train.passengersOnTrain() + " Passengers Currently on the trainat " + sName);
+				System.out.println();
+				try {
+					Thread.sleep(200);
+				} catch (InterruptedException e) {}
+				
+			}
 			
-			train.unloadPassengers(stations[i]);
-			System.out.println(train.passengersOnTrain());
-
-			train.unloadPassengers(stations[i]);
-			train.loadPassengers(stations[i]);
-			System.out.println(train.passengersOnTrain() + " Passengers Currently on the train");
-		}
-		for(int i=stations.length-1;i>=0;--i){
-			
-			int a=train.passengersOnTrain();
-			train.loadPassengers(stations[i]);
-			System.out.println(train.passengersOnTrain()-a + " got on the train at " + stations[i].getStationName());
-		
-			train.unloadPassengers(stations[i]);
-			train.loadPassengers(stations[i]);
-			System.out.println(train.passengersOnTrain() + " Passengers Currently on the train");
-		}
+			for(int i=stations.length-1;i>=0;--i){
+				if(j<NUMRUNS){
+					stations[i].queueOfPassengers();
+				}
+				String sName = stations[i].getStationName();
+				int a=train.passengersOnTrain();
+				train.loadPassengers(stations[i]);
+				System.out.println(train.passengersOnTrain()-a + " got on the train at " + sName);
+				
+				
+				a=train.passengersOnTrain();
+				train.unloadPassengers(stations[i]);
+				System.out.println(a-train.passengersOnTrain() + " got off the train at " + sName);
+				System.out.println(train.passengersOnTrain() + " Passengers Currently on the trainat " + sName);
+				System.out.println();
+				try {
+					Thread.sleep(200);
+				} catch (InterruptedException e) {}
+				
+			}
 		}
 	
 	

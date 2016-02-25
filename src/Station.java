@@ -47,10 +47,6 @@ public class Station {
 			
 			Random rand = new Random();
 			int num = rand.nextInt(15)+1;
-			while (num > 16)
-			{
-				num = rand.nextInt(15)+1;	
-			}
 			for (int i =0; i < num; i++)
 	    	{
 	    		Random rando = new Random();

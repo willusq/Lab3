@@ -14,10 +14,7 @@ public class Rider {
         this.Name=firstName[ran.nextInt(firstName.length)]+" "+lastName[ran.nextInt(lastName.length)];
         
         if (outbound){
-        	this.startStation= ran.nextInt(15);
 	        this.destination= ran.nextInt(15)+1;
-	        while (destination<startStation)
-	        	this.destination= ran.nextInt(15)+1;
 	    }
         else{
         	this.startStation= (ran.nextInt(16)+1);
@@ -37,7 +34,7 @@ public class Rider {
     	return destination;
     }
     public void printout(){
-    	System.out.println(this.getName()+" " + this.getDestination());
+    	//System.out.println(this.getName()+" " + this.getDestination());
     	
     }
     
