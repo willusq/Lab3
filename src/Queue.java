@@ -46,10 +46,7 @@ public class Queue {
 		// Return the item
 		return item;
 	}
-	public int length(){
-		
-		return list.size();
-	}
+	
 	
 
 	public Object peek()

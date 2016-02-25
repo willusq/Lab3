@@ -15,8 +15,9 @@ public class Rider {
         
         if (outbound){
         	this.startStation= ran.nextInt(15);
+	        this.destination= ran.nextInt(15)+1;
 	        while (destination<startStation)
-	        this.destination= ran.nextInt(16);
+	        	this.destination= ran.nextInt(15)+1;
 	    }
         else{
         	this.startStation= (ran.nextInt(16)+1);

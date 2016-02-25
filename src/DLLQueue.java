@@ -1,4 +1,5 @@
 
+@SuppressWarnings("rawtypes")
 public class DLLQueue<T> implements QueueInterface{
 	DNode head=new DNode(null,null,null);
 	DNode tail=new DNode(null,null,null);
@@ -22,7 +23,7 @@ public class DLLQueue<T> implements QueueInterface{
 	}
 
 	@Override
-	public T dequeue() {
+	public Object dequeue() {
 		if(head.next==null){
 			throw new EmptyQueueException();
 		}else{
@@ -34,17 +35,17 @@ public class DLLQueue<T> implements QueueInterface{
 			}else{
 			tmp.next.prev=head;	
 			}
-			return (T) tmp.data;
+			return tmp.data;
 		}
 	}
 
 	@Override
-	public T getFront() {
+	public Object getFront() {
 		if(head.next==null){
 			throw new EmptyQueueException();
 		}else{
 			DNode tmp = head.next;
-			return (T) tmp.data;
+			return tmp.data;
 		}
 	}
 

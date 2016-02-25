@@ -1,14 +1,21 @@
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Random;
+
+
 
 public class Train {
     int currentPosition=0;
     int numberOfTrains = 0;
-    static final int MAXPASSENGERS = 100;
-    
+    static final int MAX = 100;
+    boolean full;
+    ArrayList<Rider> Passengers = new ArrayList();
     int trainID;
     int currentStation, nextStation;
     //Train will go from station to station and unload and load.
     //When it gets to the end, it basically goes away for now
     public Train() {
+    	Passengers.add(new Rider(new Random(), false));
     	trainID = numberOfTrains;
     	numberOfTrains++;
     }
@@ -16,12 +23,48 @@ public class Train {
     public int getTrainID(){
     	return trainID;
     }
-    
-    public void unloadPassengers(){
+    public boolean isFull(){
+    	
+    	if(Passengers.size() < MAX)
+    	{
+    		return false;
+    	}
+    	else
+    		return true;
+    }
+    public int passengersOnTrain(){
+    	int count = 0;
+    	for(Rider a : Passengers){
+    			count++;
+    	}
+    	return count;
     	
     }
-    public void loadPassengers(){
+    
+    public void unloadPassengers(Station current){
+    	Iterator<Rider> it=Passengers.iterator();
+    	while(it.hasNext()){
+    		Rider a=it.next();
+    		if (a.getDestination() == current.getStationID()){
+    			System.out.println(a.getName() + " got off the train at " + current.getStationName());
+    			it.remove();
+    		}
+    	}
     	
+    }
+    public void loadPassengers(Station current){
+    	
+    	while (!current.outBound.isEmpty() || (this.isFull()))
+    	{
+    		try{
+    			
+    			Rider newRider = (Rider) current.outBound.dequeue();
+        		Passengers.add(newRider);
+    		}catch(EmptyQueueException e){
+    			
+    		}
+    		
+    	}
     }
 
 }    
